@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for product in products %}
+
+        <div class="card" style="width: 18rem; display:inline-block">
+          <img  src="{% if product.image %}{{ product.image.url }}{% endif %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="fw-bold">{{ product.name }}</p>
+                <p class="card-text">{{product.description|truncatewords:18}}</p>
+                <p>{{ product.price}} تومان</p>
+                <a href= "{{ product.get_absolute_url }}" class="card-title ">ادامه مطلب</a>
+            </div>
+        </div>
+    {% empty %}
+        {% if search_query %}
+            <p>جستجو نتیجه‌ای نداشت.</p>
+        {% else %}
+        <p>عبارتی برای جستجو وارد نشده است.</p>
+    {% endif %}
+
+
+        {% endfor %}
+
+
+{% endblock %}

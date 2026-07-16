@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+        <h2>{{ product.name }}</h2>
+    <small>{{ product.created }}</small><br/>
+    <p>{{ product.price}} تومان</p>
+    <img src="{{ product.image.url }}" style="width:300px;"><br><br>
+    <p>{{ product.description}} </p>
+
+    <div class = 'col-md-6'>
+    <form action="" method="post">
+        <label for="comment">ارسال نظر</label>
+        {% csrf_token %}
+        {{ form.body }}
+        <br/><input type="submit" value="ارسال">
+    </form><hr/></div>
+
+    {% for comment in comments %}
+
+        <div class = "card bg-light text-dark" >
+            <p class = 'card-header'>{{comment.user}} | {{comment.created | timesince }}</p>
+            <p class = 'card-body'>{{comment.body}}</p>
+                <div class='col-md-6'>
+                <details class="p-3">
+                <summary class="btn btn-sm btn-outline-dark">پاسخ</summary><br>
+                <form action="{% url 'home:add_reply' product.id comment.id %}"  method="post">
+                <label for="comment">ارسال نظر</label>
+                {% csrf_token %}
+                {{ form.body}}
+               <br/><input type="submit" value = "ارسال">
+                </form>
+                </details></div>
+            {% for reply in comment.approved_replies %}
+                <p class="p-3 m-2" style="background-color:#E0CECA;">{{ reply.user }}<br/>{{ reply.body }}</p>
+            {% endfor %}
+
+        </div><br/>
+
+    {% empty %}
+            <p>کامنتی برای نمایش وجود ندارد</p>
+
+    {% endfor %}
+
+{% endblock %}
