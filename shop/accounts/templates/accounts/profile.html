@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="text-center">{{ user.full_name }}</h2>
+
+  <div  style="padding: 20px;">
+  {% if request.user.id == user.id %}
+    <a href="{% url 'accounts:edit_user' %}" class="btn btn-info">ویرایش پروفایل</a>
+  {% endif %}
+  </div>
+  <div class="card" style="padding: 20px;">
+    <p>{{ profile.bio }}</p>
+  </div>
+{% endblock %}

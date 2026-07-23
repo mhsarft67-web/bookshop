@@ -1,32 +1,23 @@
 <!DOCTYPE html>
-
+{% load static %}
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <title>Shop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" >
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
 
-    <style>
-        .jumbotron{
-        padding : 20px;
-        margin-botton : 20px;
-        background-color : #EBE4E4 ;
-        }
-         body {
-            font-family: 'B Homa', Tahoma, sans-serif;
-        }
-
-
-    </style>
     {% block extra_headers %} {% endblock %}
 </head>
 <body>
+   
     {% include 'inc/navbar.html' %}
     <div class ='jumbotron'>
         {% include 'inc/messages.html' %}
         {% block content%}    {% endblock %}
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
+    </div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

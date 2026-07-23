@@ -5,6 +5,11 @@
         <h2>{{ product.name }}</h2>
     <small>{{ product.created }}</small><br/>
     <p>{{ product.price}} تومان</p>
+    <form method="post" action="{% url 'cart:add_to_cart' product.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">افزودن به سبد خرید</button>
+    </form><br>
+
     <img src="{{ product.image.url }}" style="width:300px;"><br><br>
     <p>{{ product.description}} </p>
 

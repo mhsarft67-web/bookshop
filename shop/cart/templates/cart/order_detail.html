@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>جزئیات سفارش</h2>
+    <p>تاریخ ثبت: {{ order.created_at|date:"Y/m/d H:i" }}</p>
+    <p>وضعیت: {{ order.get_status_display }}</p>
+
+    <table class="table">
+        <tr>
+            <th>محصول</th>
+            <th>قیمت واحد</th>
+            <th>تعداد</th>
+            <th>جمع</th>
+        </tr>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.price }} تومان</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.total_price }} تومان</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h4>مبلغ کل: {{ order.total_price }} تومان</h4>
+
+    <a href="{% url 'cart:order_list' %}" class="btn btn-outline-secondary">بازگشت به لیست سفارش‌ها</a>
+{% endblock %}

@@ -1,10 +1,61 @@
-<nav class="navbar navbar-expand-lg" style=" background-color:#29AB26;" data-bs-theme="light">
-  <div class="container-fluid">
-    <a class="nav-link active" href="{%url 'home:home' %}">خانه</a><br><br>
+{% load static %}
 
-    <form class="d-flex" method="get" action="{% url 'home:home'%}">
-      <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search"/>
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+<header id="header" class="navbar navbar-expand-lg navbar-light" style='background-color: #e3f2fd;'>
+  <div class="container">
+    <nav class='js-mega-menu navbar-nav-wrap navbar navbar-expand-lg w-100' >
+      <a class="navbar-brand" href="{% url 'home:home' %}" aria-label="Front"></a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-default"><i class="bi-list"></i></span>
+        <span class="navbar-toggler-toggled"><i class="bi-x"></i></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarNavDropdown">
+        <!-- سمت راست: فرم سرچ -->
+        <form class="d-flex ms-auto" method="get" action="{% url 'home:home' %}">
+          <div class="input-card d-flex">
+            <input type="text" name="search" class="form-control form-control-lg" placeholder="جستجوی محصولات" />
+            <button type="submit" class="btn btn-primary btn-lg">جستجو</button>
+          </div>
+        </form>
+
+        <!-- سمت چپ: منو -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'home:home' %}">صفحه اصلی</a>
+          </li>
+
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'accounts:user_profile' request.user.id %}">پروفایل</a>
+            </li>
+
+            {% if request.user.is_admin %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'cart:admin_order_create' %}">ثبت فاکتور</a>
+              </li>
+            {% endif %}
+          {% endif %}
+
+          <li class="nav-item">
+            <a class="nav-link active position-relative" href="{% url 'cart:cart_detail' %}">
+              سبد خرید{% if cart_items_count > 0 %}
+                <span class="badge bg-danger rounded-circle" style="display:inline-flex; align-items:center; justify-content:center;
+                             width:20px; height:20px; padding:0; font-size:12px;">{{ cart_items_count }}</span>
+              {% endif %}
+            </a>
+          </li>
+
+          <li class="nav-item">
+            {% if request.user.is_authenticated %}
+              <a class="btn btn-outline-danger btn-transition" href="{% url 'accounts:user_logout' %}">خروج از حساب</a>
+            {% else %}
+              <a class="btn btn-outline-primary btn-transition" href="{% url 'accounts:user_login' %}">ورود</a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
-</nav>
+</header>
+  <!--footer-->

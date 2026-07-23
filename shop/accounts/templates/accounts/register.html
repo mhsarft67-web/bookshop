@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <main id="content" role="main">
+        <div class="container content-space-3 content-space-t-lg-4 content-space-b-lg-3">
+          <div class="flex-grow-1 mx-auto" style="max-width: 28rem;">
+            <div class="text-center mb-5 mb-md-7">
+              <h1 class="h2">فرم ثبت نام</h1>
+              <p>برای ثبت نام کافیست فرم زیر را پر نمایید</p>
+            </div>
+        
+            <form method="post" action="{% url 'accounts:user_register' %}" class="js-validate needs-validation" novalidate>
+              {% csrf_token %}
+              
+              <!-- Form -->
+              <div class="mb-3">
+                <label class="form-label" for="id_phone">تلفن همراه</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                    <span class="invalid-feedback d-block">{{ form.phone.errors.0 }}</span>
+                {% endif %}
+              </div>
+
+            <div class="mb-3">
+              <label class="form-label">نام کاربری</label>
+              {{ form.full_name }}
+              {% if form.full_name.errors %}
+                  <span class="invalid-feedback d-block">{{ form.full_name.errors.0 }}</span>
+              {% endif %}
+            </div>
+              
+              <div class="mb-3">
+                <label class="form-label" for="signupSimpleSignupPassword">رمز عبور</label>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <span class="invalid-feedback d-block">{{ form.password.errors.0 }}</span>
+                {% endif %}
+                
+                </div>
+
+              <!-- End Form -->
+
+              <!-- Form -->
+              
+
+              
+              <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">ثبت نام</button>
+              </div>
+
+              <div class="text-center">
+                <p>از قبل حساب کاربری دارید؟<a class="link" href="{% url 'accounts:user_login' %}">از اینجا وارد شوید</a></p>
+              </div>
+            </form>
+            <!-- End Form -->
+          </div>
+        </div>
+    <!-- End Form -->
+    </main>
+  {% endblock %}  

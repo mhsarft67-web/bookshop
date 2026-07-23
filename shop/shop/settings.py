@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
-    'home.apps.HomeConfig'
+    'home.apps.HomeConfig',
+    'cart.apps.CartConfig'
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart_context'
             ],
         },
     },
@@ -125,6 +127,10 @@ MEDIA_URL=  '/media/'
 
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 AUTH_USER_MODEL = 'accounts.User'
 
+LOGIN_URL = 'accounts:user_login'

@@ -1,0 +1,18 @@
+body {
+    font-family: 'B Yekan', Tahoma, sans-serif;
+    background-color: #f6f6f6; 
+    margin: 0;
+    padding: 0;
+}
+
+.jumbotron {
+    padding: 20px;
+    margin-bottom: 20px;
+    
+}
+
+.footer-white {
+    background-color: #ffffff !important;
+    width: 100%;
+    display: block;
+}

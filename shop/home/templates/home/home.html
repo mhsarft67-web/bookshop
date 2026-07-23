@@ -1,27 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    {% for product in products %}
-
-        <div class="card" style="width: 18rem; display:inline-block">
-          <img  src="{% if product.image %}{{ product.image.url }}{% endif %}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="fw-bold">{{ product.name }}</p>
-                <p class="card-text">{{product.description|truncatewords:18}}</p>
-                <p>{{ product.price}} تومان</p>
-                <a href= "{{ product.get_absolute_url }}" class="card-title ">ادامه مطلب</a>
-            </div>
-        </div>
-    {% empty %}
-        {% if search_query %}
-            <p>جستجو نتیجه‌ای نداشت.</p>
-        {% else %}
-        <p>عبارتی برای جستجو وارد نشده است.</p>
+  {% for product in products %}
+    <div class="card" style="width: 18rem; display:inline-block">
+      <img src="{% if product.image %}{{ product.image.url }}{% endif %}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <p class="fw-bold">{{ product.name }}</p>
+        <p class="card-text">{{ product.description|truncatewords:18 }}</p>
+        <p>{{ product.price }} تومان</p>
+        <a href="{{ product.get_absolute_url }}" class="card-title">ادامه مطلب</a>
+        <form method="post" action="{% url 'cart:add_to_cart' product.id %}">
+          {% csrf_token %}
+          <div class="d-flex justify-content-end align-items-center gap-2 mt-3">
+          <button type="submit" class="btn btn-primary">افزودن به سبد خرید</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% empty %}
+    {% if search_query %}
+      <p>جستجو نتیجه‌ای نداشت.</p>
+    {% else %}
+      <p>عبارتی برای جستجو وارد نشده است.</p>
     {% endif %}
-
-
-        {% endfor %}
-
-
+  {% endfor %}
+  <!--footer-->
+  <footer class='footer-white border-top shadow-sm mt-5'>
+  <div class="container">
+    <div class="row py-4">
+      <div class="col-12 text-center">
+        <p class="mb-0 text-muted">کلیه حقوق این سایت متعلق به فروشگاه آنلاین می‌باشد.</p>
+      </div>
+    </div>
+  </div>
+</footer>
 {% endblock %}

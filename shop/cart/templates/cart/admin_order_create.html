@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>ثبت فاکتور جدید</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {{ formset.management_form }}
+
+    <table class="table">
+      <tr>
+        <th>محصول</th>
+        <th>تعداد</th>
+        <th>قیمت</th>
+        <th>حذف</th>
+      </tr>
+      {% for item_form in formset %}
+        <tr>
+          <td>{{ item_form.product }}</td>
+          <td>{{ item_form.quantity }}</td>
+          <td>{{ item_form.price }}</td>
+          <td>{{ item_form.DELETE }}</td>
+          {% if item_form.errors %}
+              <td class="text-danger">{{ item_form.errors }}</td>
+          {% endif %}
+          {{ item_form.id }}
+        </tr>
+      {% endfor %}
+    </table>
+
+    <button type="submit" class="btn btn-primary">ثبت فاکتور</button>
+  </form>
+{% endblock %}
